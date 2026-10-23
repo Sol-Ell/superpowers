@@ -1,0 +1,12 @@
+# DeepSeek Harness bundle layer.
+#
+# Installing this package as a dsh bundle appends this layer to the profile:
+# one row mounting ./plugin.js, which registers the skills in ./skills with the
+# harness skill registry and injects the SessionStart bootstrap. Removing the
+# bundle removes the row, the provider, and the injection together.
+#
+# The row name is a path anchored beside this patch file, so the bundle works
+# from wherever it is installed.
+- insert:
+    - id: superpowers
+      name: './plugin.js'

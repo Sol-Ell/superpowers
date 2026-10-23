@@ -23,6 +23,7 @@ Superpowers is a complete software development methodology for your coding agent
   - [Qwen Code](#qwen-code)
   - [Hermes Agent](#hermes-agent)
   - [Muse](#muse)
+  - [DeepSeek Harness](#deepseek-harness)
 - [The Basic Workflow](#the-basic-workflow)
 - [When Something Goes Wrong](#when-something-goes-wrong)
 - [Community](#community)
@@ -304,6 +305,27 @@ Superpowers is available as a native Muse plugin — same repo, same skills, all
   ```
 
 Restart any active Muse sessions after installing so the `SessionStart` hook takes effect — skills are active immediately, hooks require approval on first install. To verify, start a fresh session and send `Let's make a react todo list` — a working install auto-triggers `brainstorming` before any code is written. Version is tracked in `.version-bump.json` so `scripts/bump-version.sh` keeps it in sync.
+
+### DeepSeek Harness
+
+Superpowers installs into [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (`dsh`) as a bundle — one Cordis plugin that registers the skills with the harness skill registry (bare names, `skill` tool) and injects the `using-superpowers` bootstrap at session start. Nothing outside the dsh profile is modified.
+
+- Install from a checkout of this repository (a stable path outside your projects — the profile links to it):
+
+  ```bash
+  git clone https://github.com/Sol-Ell/superpowers ~/.local/share/superpowers
+  dsh plugin --profile web add ~/.local/share/superpowers
+  ```
+
+- Remove it the same way:
+
+  ```bash
+  dsh plugin --profile web remove superpowers
+  ```
+
+- Update later: `git pull` in the checkout (it is installed as a `link:` dependency). Restart `dsh` so the next session picks up the bootstrap and catalog.
+
+- Detailed install, verification, and limits: [docs/README.dsh.md](docs/README.dsh.md). Offline tests: `bash tests/dsh/run-tests.sh`.
 
 ## The Basic Workflow
 
